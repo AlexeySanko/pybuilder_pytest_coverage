@@ -29,7 +29,7 @@ def init(project):
     project.set_property_if_unset("pytest_coverage_break_build_threshold", 50)
 ```
 
-If You use `pybuilder_pytest_coverage-cov` do not forget to disable PyBuilder `coverage` plugin, 
+If You use `pybuilder_pytest_coverage` do not forget to disable PyBuilder `coverage` plugin, 
 for avoiding unexpected results or exception:
 
 ~~use_plugin("python.coverage")~~
