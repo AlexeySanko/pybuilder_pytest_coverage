@@ -14,7 +14,7 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-from pybuilder.core import init, use_plugin
+from pybuilder.core import before, init, use_plugin
 from pybuilder.utils import discover_modules
 
 __author__ = 'Alexey Sanko'
@@ -35,6 +35,9 @@ def initialize_pytest_coverage(project):
     project.set_property_if_unset("pytest_coverage_annotate", False)
     project.set_property_if_unset("pytest_coverage_break_build_threshold", 0)
 
+
+@before("prepare", only_once=True)
+def enable_pytest_coverage(project, logger):
     # collect pytest_extra_args according properties
     for module_name in discover_modules(project.expand_path("$dir_source_main_python")):
         project.get_property("pytest_extra_args").append("--cov=" + module_name)
@@ -59,3 +62,6 @@ def initialize_pytest_coverage(project):
         project.get_property("pytest_extra_args").append(
             "--cov-fail-under=" + str(project.get_property("pytest_coverage_break_build_threshold"))
         )
+    formatted = "\n%40s : %s" % ("pytest_extra_args", project.get_property("pytest_extra_args"))
+    logger.debug("Changed pytest_extra_args property: {output}"
+                 .format(output=formatted))

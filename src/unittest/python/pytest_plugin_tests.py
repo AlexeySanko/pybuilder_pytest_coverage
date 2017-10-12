@@ -14,11 +14,11 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-from mock import patch
+from mock import Mock, patch
 from unittest import TestCase
 
 from pybuilder.core import Project
-from pybuilder_pytest_coverage import initialize_pytest_coverage
+from pybuilder_pytest_coverage import initialize_pytest_coverage, enable_pytest_coverage
 
 
 class PytestPluginInitializationTests(TestCase):
@@ -39,6 +39,9 @@ class PytestPluginInitializationTests(TestCase):
         for property_name, property_value in expected_default_properties.items():
             self.assertEquals(self.project.get_property(property_name), property_value)
 
+    def test_should_set_enable_default_properties(self):
+        initialize_pytest_coverage(self.project)
+        enable_pytest_coverage(self.project, Mock())
         self.assertEquals(
             self.project.get_property("pytest_extra_args"),
             ["pytest_stub",
@@ -64,6 +67,8 @@ class PytestPluginInitializationTests(TestCase):
 
         for property_name, property_value in expected_properties.items():
             self.assertEquals(self.project.get_property(property_name), property_value)
+
+        enable_pytest_coverage(self.project, Mock())
 
         self.assertEquals(
             self.project.get_property("pytest_extra_args"),
