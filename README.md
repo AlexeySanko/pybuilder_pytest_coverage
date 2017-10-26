@@ -30,8 +30,8 @@ Plugin has next properties with provided defaults
 
 | Name | Type | Default Value | Description |
 | --- | --- | --- | --- |
-| pytest_coverage_skip_covered | bool | `False` | Skip fully covered modules into console output |
-| pytest_coverage_xml | bool | `False` | Export coverage result to XML report file |
-| pytest_coverage_html | bool | `False` | Export coverage result to HTML |
-| pytest_coverage_annotate | bool | `False` | Export coverage result to annonate |
+| pytest_coverage_skip_covered | bool | False | Skip fully covered modules into console output |
+| pytest_coverage_xml | bool | False | Export coverage result to XML report file |
+| pytest_coverage_html | bool | False | Export coverage result to HTML |
+| pytest_coverage_annotate | bool | False | Export coverage result to annonate |
 | pytest_coverage_break_build_threshold | integer | 0 | Break build if coverage less then threshold. Note that coverage include branch coverage |
