@@ -2,15 +2,35 @@ sudo: false
 language: python
 python:
 - '2.7'
-- '3.3'
 - '3.4'
 - '3.5'
-- pypy
-branches:
-  only:
-  - master
+- '3.6'
+- '3.7-dev'
+- 'pypy'
+- 'pypy3'
 install:
   - pip install pybuilder
   - pyb install_dependencies --verbose
 script:
   - pyb --debug
+deploy:
+  - provider: pypi
+    user: AlexeySanko
+    server: https://upload.pypi.org/legacy/
+    password:
+      secure: x9K1DSlfnfm9vouCJq6PhMC7qK/WeJsftq8rdxbrWPkQGY8w187EUu7Avq/B0GdDwS20/hN+hcVK1jEUL265hGSl1Dx7REBhc/Sc+KtdjC969q1nF5VpD22I9cWS3KRcpMCeoXwZoQLo1wBxLF8UYENgNsTAqzmo3p5lYLuZKgUqdh7vPGq4F62RIG1EvmQIhvheBZZcw7Y1vhnXiT7EJBZxD7PxBq/O25K8fpReeMaIbP8AM2jEHCiB2sth8Kavgz/pj+mpqyGvtnaf1sBhx+2e5PIHJ4PIN1HKSlqe1MfAmuM1f63j8zO7mJkam5uL9hQPvCvbiWN+Py0Un1VWkcdAY8Lp28olxn8twQ1as5A+gUOPdIBdzJlcrtH2wnO1qwOC9yFx0TzG4pMMIl2Ywn7LE/EoAlyoXj2XQD7TkbFFKoXBsTy82UO/n5V5gOB1e43Kpk9MRxYeT9YgVX5DGGFzQZ/UjLM5svpZrBRLLlVnJGhfdE6T6aUtD6uZJ6G2VZAVXURGx3zWeFJV/JSKX6gzK5gVHqUdisZes9Xmfn7ZWDXOxRVmpCDIi4walQ6xvErdmfMFJIVxOR5IqaGKYF2se4IBcGhTEZVizBlD/jSwy+RgpQCiV/dWPcq2g6LvGn4UlzMUg/Q59ZcNiVFzP8FHIMGJNuwYH1aA5X2TaLQ=
+    on:
+      tags: true
+      python: '2.7'
+      repo: AlexeySanko/pybuilder_pytest_coverage
+    distributions: bdist_wheel
+  - provider: pypi
+    user: AlexeySanko
+    server: https://upload.pypi.org/legacy/
+    password:
+      secure: x9K1DSlfnfm9vouCJq6PhMC7qK/WeJsftq8rdxbrWPkQGY8w187EUu7Avq/B0GdDwS20/hN+hcVK1jEUL265hGSl1Dx7REBhc/Sc+KtdjC969q1nF5VpD22I9cWS3KRcpMCeoXwZoQLo1wBxLF8UYENgNsTAqzmo3p5lYLuZKgUqdh7vPGq4F62RIG1EvmQIhvheBZZcw7Y1vhnXiT7EJBZxD7PxBq/O25K8fpReeMaIbP8AM2jEHCiB2sth8Kavgz/pj+mpqyGvtnaf1sBhx+2e5PIHJ4PIN1HKSlqe1MfAmuM1f63j8zO7mJkam5uL9hQPvCvbiWN+Py0Un1VWkcdAY8Lp28olxn8twQ1as5A+gUOPdIBdzJlcrtH2wnO1qwOC9yFx0TzG4pMMIl2Ywn7LE/EoAlyoXj2XQD7TkbFFKoXBsTy82UO/n5V5gOB1e43Kpk9MRxYeT9YgVX5DGGFzQZ/UjLM5svpZrBRLLlVnJGhfdE6T6aUtD6uZJ6G2VZAVXURGx3zWeFJV/JSKX6gzK5gVHqUdisZes9Xmfn7ZWDXOxRVmpCDIi4walQ6xvErdmfMFJIVxOR5IqaGKYF2se4IBcGhTEZVizBlD/jSwy+RgpQCiV/dWPcq2g6LvGn4UlzMUg/Q59ZcNiVFzP8FHIMGJNuwYH1aA5X2TaLQ=
+    on:
+      tags: true
+      python: '3.6'
+      repo: AlexeySanko/pybuilder_pytest_coverage
+    distributions: bdist_wheel
