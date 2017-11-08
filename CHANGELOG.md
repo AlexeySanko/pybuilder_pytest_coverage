@@ -1,8 +1,8 @@
 PyBuilder Pytest Coverage Plugin [![Build Status](https://travis-ci.org/AlexeySanko/pybuilder_pytest_coverage.svg?branch=master)](https://travis-ci.org/AlexeySanko/pybuilder_pytest_coverage)
 =======================
-
 1.1.3
------
+---
+- `__version__` added
 - setup.py added to root for deploy process
 
 1.1.2

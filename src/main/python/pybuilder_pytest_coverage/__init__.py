@@ -17,7 +17,10 @@
 from pybuilder.core import before, init, use_plugin
 from pybuilder.utils import discover_modules
 
+from pybuilder_pytest_coverage import version
+
 __author__ = 'Alexey Sanko'
+__version__ = version.__version__
 
 use_plugin("python.core")
 
@@ -39,29 +42,37 @@ def initialize_pytest_coverage(project):
 @before("prepare", only_once=True)
 def enable_pytest_coverage(project, logger):
     # collect pytest_extra_args according properties
-    for module_name in discover_modules(project.expand_path("$dir_source_main_python")):
+    for module_name in discover_modules(
+            project.expand_path("$dir_source_main_python")):
         project.get_property("pytest_extra_args").append("--cov=" + module_name)
     project.get_property("pytest_extra_args").append("--cov-branch")
     project.get_property("pytest_extra_args").append(
         "--cov-report=term-missing" +
-        (":skip-covered" if project.get_property("pytest_coverage_skip_covered") else "")
+        (":skip-covered"
+         if project.get_property("pytest_coverage_skip_covered")
+         else "")
     )
     if project.get_property("pytest_coverage_xml"):
         project.get_property("pytest_extra_args").append(
-            "--cov-report=xml:" + project.expand_path("$dir_reports/pytest_coverage.xml")
+            "--cov-report=xml:" + project.expand_path(
+                "$dir_reports/pytest_coverage.xml")
         )
     if project.get_property("pytest_coverage_html"):
         project.get_property("pytest_extra_args").append(
-            "--cov-report=html:" + project.expand_path("$dir_reports/pytest_coverage_html")
+            "--cov-report=html:" + project.expand_path(
+                "$dir_reports/pytest_coverage_html")
         )
     if project.get_property("pytest_coverage_annotate"):
         project.get_property("pytest_extra_args").append(
-            "--cov-report=annotate:" + project.expand_path("$dir_reports/pytest_coverage_annotate")
+            "--cov-report=annotate:" + project.expand_path(
+                "$dir_reports/pytest_coverage_annotate")
         )
     if project.get_property("pytest_coverage_break_build_threshold") > 0:
         project.get_property("pytest_extra_args").append(
-            "--cov-fail-under=" + str(project.get_property("pytest_coverage_break_build_threshold"))
+            "--cov-fail-under=" + str(project.get_property(
+                "pytest_coverage_break_build_threshold"))
         )
-    formatted = "\n%40s : %s" % ("pytest_extra_args", project.get_property("pytest_extra_args"))
+    formatted = "\n%40s : %s" % ("pytest_extra_args",
+                                 project.get_property("pytest_extra_args"))
     logger.debug("Changed pytest_extra_args property: {output}"
                  .format(output=formatted))
